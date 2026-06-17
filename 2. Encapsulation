@@ -71,3 +71,445 @@ int main() {
 
     s.display();
 }
+
+
+
+Here are the most common **Encapsulation interview questions** from basic to advanced.
+
+---
+
+# 1. What is Encapsulation?
+
+**Answer:**
+
+Encapsulation is the process of bundling data members and member functions into a single unit (class) and restricting direct access to data using access specifiers.
+
+```cpp
+class Student{
+private:
+    int age;
+
+public:
+    void setAge(int a){
+        age = a;
+    }
+};
+```
+
+---
+
+# 2. What problem does Encapsulation solve?
+
+Without encapsulation:
+
+```cpp
+s.age = -100;
+```
+
+Invalid data can be stored.
+
+With encapsulation:
+
+```cpp
+private:
+    int age;
+```
+
+Data can only be modified through controlled methods.
+
+---
+
+# 3. Is Encapsulation the same as Data Hiding?
+
+**No.**
+
+### Data Hiding
+
+```cpp
+private:
+    int age;
+```
+
+Only hiding data.
+
+### Encapsulation
+
+```cpp
+private:
+    int age;
+
+public:
+    void setAge(int age);
+```
+
+Combining data and methods together.
+
+**Data hiding is a part of encapsulation.**
+
+---
+
+# 4. Which access specifier is most commonly used for encapsulation?
+
+```cpp
+private
+```
+
+because data should not be directly accessible.
+
+---
+
+# 5. Why are getters and setters used?
+
+To provide controlled access.
+
+```cpp
+void setAge(int age){
+    if(age >= 0)
+        this->age = age;
+}
+```
+
+Validation can be performed before updating data.
+
+---
+
+# 6. Can Encapsulation exist without getters/setters?
+
+**Yes.**
+
+Example:
+
+```cpp
+class BankAccount{
+
+private:
+    double balance;
+
+public:
+    void deposit(double amount){
+        balance += amount;
+    }
+
+    void withdraw(double amount){
+        balance -= amount;
+    }
+};
+```
+
+No getters/setters used.
+
+Still encapsulated.
+
+---
+
+# 7. What is a Fully Encapsulated Class?
+
+A class where all data members are private.
+
+```cpp
+class Student{
+
+private:
+    int age;
+    string name;
+
+public:
+    void setAge(int);
+    int getAge();
+};
+```
+
+---
+
+# 8. What are the advantages of Encapsulation?
+
+### Data Security
+
+```cpp
+private:
+    int balance;
+```
+
+---
+
+### Controlled Access
+
+```cpp
+deposit()
+withdraw()
+```
+
+---
+
+### Data Validation
+
+```cpp
+if(age >= 0)
+```
+
+---
+
+### Easy Maintenance
+
+Internal implementation can change without affecting users.
+
+---
+
+# 9. What is the difference between Abstraction and Encapsulation?
+
+### Encapsulation
+
+Focuses on:
+
+```text
+How data is protected
+```
+
+Example:
+
+```cpp
+private:
+    int balance;
+```
+
+---
+
+### Abstraction
+
+Focuses on:
+
+```text
+Hiding implementation details
+```
+
+Example:
+
+```cpp
+car.start();
+```
+
+User doesn't know how engine starts.
+
+---
+
+### Interview One-Liner
+
+```text
+Encapsulation hides data.
+Abstraction hides implementation.
+```
+
+---
+
+# 10. Is private mandatory for encapsulation?
+
+**No.**
+
+You can use:
+
+```cpp
+protected
+```
+
+also.
+
+But private gives maximum protection.
+
+---
+
+# 11. Can Encapsulation improve security?
+
+Yes.
+
+Example:
+
+```cpp
+private:
+    double balance;
+```
+
+No external code can directly manipulate balance.
+
+---
+
+# 12. How is Encapsulation achieved in C++?
+
+Using:
+
+* Classes
+* Access Specifiers
+
+  * private
+  * protected
+  * public
+* Controlled member functions
+
+---
+
+# 13. Does Encapsulation increase flexibility?
+
+Yes.
+
+Suppose today:
+
+```cpp
+int age;
+```
+
+Tomorrow:
+
+```cpp
+long long age;
+```
+
+Outside code remains unchanged if it accesses through methods.
+
+---
+
+# 14. What is the relationship between OOP and Encapsulation?
+
+Encapsulation is one of the four major OOP pillars:
+
+1. Encapsulation
+2. Inheritance
+3. Polymorphism
+4. Abstraction
+
+---
+
+# 15. Why should data members generally be private?
+
+To prevent:
+
+```cpp
+s.cgpa = 50;
+s.age = -10;
+```
+
+and maintain object integrity.
+
+---
+
+# 16. Can a friend function access private members?
+
+Yes.
+
+```cpp
+friend void display(Student);
+```
+
+Friend functions break encapsulation intentionally.
+
+---
+
+# 17. Does Encapsulation affect memory layout?
+
+No.
+
+```cpp
+private:
+    int x;
+```
+
+and
+
+```cpp
+public:
+    int x;
+```
+
+occupy the same memory.
+
+Access specifiers affect accessibility, not memory.
+
+---
+
+# 18. What is object integrity?
+
+Object should always remain in a valid state.
+
+Example:
+
+```cpp
+age >= 0
+cgpa <= 10
+balance >= 0
+```
+
+Encapsulation helps enforce these rules.
+
+---
+
+# 19. What is the biggest real-world example of encapsulation?
+
+### ATM
+
+User can:
+
+```text
+Withdraw
+Deposit
+Check Balance
+```
+
+User cannot:
+
+```text
+Directly modify bank database
+```
+
+This is encapsulation.
+
+---
+
+# 20. Coding Interview Question
+
+### Design a class where salary can never become negative.
+
+```cpp
+class Employee{
+
+private:
+    int salary;
+
+public:
+
+    void setSalary(int s){
+
+        if(s >= 0)
+            salary = s;
+    }
+
+    int getSalary(){
+        return salary;
+    }
+};
+```
+
+---
+
+# Quick Revision (30 sec)
+
+```text
+Encapsulation = Data + Methods in one class
+             + Restrict direct access to data.
+
+Achieved using:
+1. Class
+2. private/protected/public
+3. Controlled methods
+
+Benefits:
+- Security
+- Validation
+- Controlled Access
+- Maintainability
+
+Data Hiding ⊂ Encapsulation
+
+Encapsulation hides data.
+Abstraction hides implementation.
+```
+
+These ~20 questions cover almost everything that gets asked about Encapsulation in placement interviews, college vivas, and OOP theory rounds.
+
