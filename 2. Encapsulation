@@ -1,3 +1,5 @@
+Encapsulation = Binding data and functions together + restricting direct access to data.
+
 #include <iostream>
 using namespace std;
 
