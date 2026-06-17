@@ -1,0 +1,158 @@
+#include <iostream>
+using namespace std;
+
+class Student {
+private:
+    string name;
+    int age;
+    double cgpa;
+
+    static int totalStudents;
+
+public:
+
+    // Default Constructor
+    Student() {
+        name = "Unknown";
+        age = 0;
+        cgpa = 0.0;
+
+        totalStudents++;
+
+        cout << "Default Constructor Called\n";
+    }
+
+    // Parameterized Constructor
+    Student(string name, int age, double cgpa) {
+        this->name = name;
+        this->age = age;
+        this->cgpa = cgpa;
+
+        totalStudents++;
+
+        cout << "Parameterized Constructor Called\n";
+    }
+
+    // Copy Constructor
+    Student(const Student &other) {
+        name = other.name;
+        age = other.age;
+        cgpa = other.cgpa;
+
+        totalStudents++;
+
+        cout << "Copy Constructor Called\n";
+    }
+
+    // Destructor
+    ~Student() {
+        cout << "Destructor Called for " << name << endl;
+    }
+
+    // Setter Functions
+    void setName(string name) {
+        this->name = name;
+    }
+
+    void setAge(int age) {
+        if(age >= 0)
+            this->age = age;
+    }
+
+    void setCGPA(double cgpa) {
+        if(cgpa >= 0 && cgpa <= 10)
+            this->cgpa = cgpa;
+    }
+
+    // Getter Functions
+    string getName() {
+        return name;
+    }
+
+    int getAge() {
+        return age;
+    }
+
+    double getCGPA() {
+        return cgpa;
+    }
+
+    // Member Function
+    void display() {
+        cout << "Name : " << name << endl;
+        cout << "Age  : " << age << endl;
+        cout << "CGPA : " << cgpa << endl;
+        cout << endl;
+    }
+
+    // Function accepting object
+    void compareCGPA(Student other) {
+        if(cgpa > other.cgpa)
+            cout << name << " has higher CGPA\n";
+        else
+            cout << other.name << " has higher CGPA\n";
+    }
+
+    // Static Function
+    static void showTotalStudents() {
+        cout << "Total Students Created: "
+             << totalStudents << endl;
+    }
+};
+
+int Student::totalStudents = 0;
+
+Student createStudent() {
+    Student temp("Lakshay", 21, 8.5);
+    return temp;
+}
+
+int main() {
+
+    cout << "----- Object Creation -----\n";
+
+    Student s1;
+
+    Student s2("Rahul", 20, 8.2);
+
+    cout << "\n----- Display -----\n";
+
+    s1.display();
+    s2.display();
+
+    cout << "\n----- Setters -----\n";
+
+    s1.setName("Aman");
+    s1.setAge(19);
+    s1.setCGPA(9.1);
+
+    s1.display();
+
+    cout << "\n----- Getters -----\n";
+
+    cout << s1.getName() << endl;
+    cout << s1.getAge() << endl;
+    cout << s1.getCGPA() << endl;
+
+    cout << "\n----- Copy Constructor -----\n";
+
+    Student s3 = s2;
+
+    s3.display();
+
+    cout << "\n----- Passing Objects -----\n";
+
+    s1.compareCGPA(s2);
+
+    cout << "\n----- Returning Objects -----\n";
+
+    Student s4 = createStudent();
+
+    s4.display();
+
+    cout << "\n----- Static Members -----\n";
+
+    Student::showTotalStudents();
+
+    return 0;
+}
