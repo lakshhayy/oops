@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+class Student {
+
+private:
+    string name;
+    int age;
+    double cgpa;
+
+public:
+
+    void setName(string n) {
+        name = n;
+    }
+
+    void setAge(int a) {
+
+        if(a >= 0) {
+            age = a;
+        }
+        else {
+            cout << "Invalid Age\n";
+        }
+    }
+
+    void setCGPA(double c) {
+
+        if(c >= 0 && c <= 10) {
+            cgpa = c;
+        }
+        else {
+            cout << "Invalid CGPA\n";
+        }
+    }
+
+    string getName() {
+        return name;
+    }
+
+    int getAge() {
+        return age;
+    }
+
+    double getCGPA() {
+        return cgpa;
+    }
+
+    void display() {
+
+        cout << "Name : " << name << endl;
+        cout << "Age  : " << age << endl;
+        cout << "CGPA : " << cgpa << endl;
+    }
+};
+
+int main() {
+
+    Student s;
+
+    s.setName("Lakshay");
+
+    s.setAge(21);
+
+    s.setCGPA(8.5);
+
+    s.display();
+}
