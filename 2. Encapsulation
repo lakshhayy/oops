@@ -1,5 +1,8 @@
 Encapsulation = Binding data and functions together + restricting direct access to data.
 
+Encapsulation = Wrapping data and methods into a single unit (class)
+and restricting direct access to data using private members.
+
 #include <iostream>
 using namespace std;
 
