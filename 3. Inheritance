@@ -40,3 +40,88 @@ Protected Members
 | Public     | Private                    | Protected                    | Public                    |
 
 
+
+
+# Types of Inheritance
+
+## 1. Single Inheritance
+
+```text
+      ClassA
+         ▲
+         │
+      ClassB
+```
+
+---
+
+## 2. Multilevel Inheritance
+
+```text
+      ClassA
+         ▲
+         │
+      ClassB
+         ▲
+         │
+      ClassC
+```
+
+---
+
+## 3. Hierarchical Inheritance
+
+```text
+           ClassA
+          ▲     ▲
+         /       \
+        /         \
+   ClassB       ClassC
+```
+
+---
+
+## 4. Multiple Inheritance
+
+```text
+      ClassA      ClassB
+         ▲          ▲
+          \        /
+           \      /
+            \    /
+            ClassC
+```
+
+---
+
+## 5. Hybrid Inheritance
+
+```text
+             ClassA
+            ▲     ▲
+           /       \
+          /         \
+     ClassB       ClassC
+           ▲       ▲
+            \     /
+             \   /
+             ClassD
+```
+
+---
+
+## Quick Revision
+
+```text
+Single       : One Parent → One Child
+
+Multilevel   : Grandparent → Parent → Child
+
+Hierarchical : One Parent → Multiple Children
+
+Multiple     : Multiple Parents → One Child
+
+Hybrid       : Combination of Multiple Types
+```
+
+
