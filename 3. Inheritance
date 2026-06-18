@@ -1,1 +1,7 @@
+Inheritance
 
+1. Similar to Inheritance in Life.
+2. Child inherits attributes and behaviours from Parent.
+3. Inheritance is a way to create a Class from existing Class.
+4. The Derived / Child / Sub class inherits some attributes and behaviours from 
+Base / Parent / Super Class, and may have more specialised attributes and behaviours.
