@@ -39,6 +39,10 @@ Access Modifiers
    1. Members declared as protected are accessible within the same class and by derived classes.
    2. They are not directly accessible from external code.
 
+What is Perfect (Fully) Encapsulation?
+
+A class is called fully encapsulated when all data members are declared private and can only be accessed through public member functions.
+
 #include <iostream>
 using namespace std;
 
