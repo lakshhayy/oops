@@ -113,6 +113,34 @@ int main() {
 }
 
 
+#include <iostream>
+using namespace std;
+
+class Student {
+
+private:
+    void secretMethod() {
+        cout << "Private Method Called\n";
+    }
+
+public:
+    void publicMethod() {
+        cout << "Public Method Called\n";
+    }
+};
+
+int main() {
+
+    Student s;
+
+    s.publicMethod();   // Works
+
+    s.secretMethod();   // ERROR
+
+    return 0;
+}
+
+
 
 Here are the most common **Encapsulation interview questions** from basic to advanced.
 
