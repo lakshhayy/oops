@@ -125,3 +125,202 @@ Hybrid       : Combination of Multiple Types
 ```
 
 
+#include <iostream>
+using namespace std;
+
+// ================= BASE CLASS =================
+
+class Vehicle {
+
+protected:
+    string name;
+    string model;
+    int noOfTyres;
+
+public:
+
+    Vehicle(string name, string model, int noOfTyres) {
+
+        cout << "Vehicle Constructor Called" << endl;
+
+        this->name = name;
+        this->model = model;
+        this->noOfTyres = noOfTyres;
+    }
+
+    void startEngine() {
+        cout << name << " Engine Started" << endl;
+    }
+
+    void stopEngine() {
+        cout << name << " Engine Stopped" << endl;
+    }
+
+    void showVehicleInfo() {
+
+        cout << "\nVehicle Information" << endl;
+
+        cout << "Name      : " << name << endl;
+        cout << "Model     : " << model << endl;
+        cout << "Tyres     : " << noOfTyres << endl;
+    }
+
+    ~Vehicle() {
+        cout << "Vehicle Destructor Called" << endl;
+    }
+};
+
+// ================= SINGLE INHERITANCE =================
+
+class Car : public Vehicle {
+
+protected:
+    int noOfDoors;
+
+public:
+
+    Car(string name,
+        string model,
+        int noOfTyres,
+        int noOfDoors)
+
+        : Vehicle(name, model, noOfTyres)
+    {
+        cout << "Car Constructor Called" << endl;
+
+        this->noOfDoors = noOfDoors;
+    }
+
+    void showCarInfo() {
+
+        showVehicleInfo();
+
+        cout << "Doors     : "
+             << noOfDoors << endl;
+    }
+
+    void startEngine() {
+
+        cout << "Car Specific Engine Start" << endl;
+    }
+
+    ~Car() {
+        cout << "Car Destructor Called" << endl;
+    }
+};
+
+// ================= MULTILEVEL INHERITANCE =================
+
+class SportsCar : public Car {
+
+private:
+    int topSpeed;
+
+public:
+
+    SportsCar(string name,
+              string model,
+              int tyres,
+              int doors,
+              int topSpeed)
+
+        : Car(name, model, tyres, doors)
+    {
+        cout << "SportsCar Constructor Called" << endl;
+
+        this->topSpeed = topSpeed;
+    }
+
+    void showSportsCarInfo() {
+
+        showCarInfo();
+
+        cout << "Top Speed : "
+             << topSpeed << endl;
+    }
+
+    ~SportsCar() {
+        cout << "SportsCar Destructor Called" << endl;
+    }
+};
+
+// ================= HIERARCHICAL INHERITANCE =================
+
+class Bike : public Vehicle {
+
+private:
+    bool hasABS;
+
+public:
+
+    Bike(string name,
+         string model,
+         int tyres,
+         bool hasABS)
+
+        : Vehicle(name, model, tyres)
+    {
+        cout << "Bike Constructor Called" << endl;
+
+        this->hasABS = hasABS;
+    }
+
+    void showBikeInfo() {
+
+        showVehicleInfo();
+
+        cout << "ABS       : "
+             << (hasABS ? "Yes" : "No")
+             << endl;
+    }
+
+    ~Bike() {
+        cout << "Bike Destructor Called" << endl;
+    }
+};
+
+int main() {
+
+    cout << "=========== SPORTS CAR ===========" << endl;
+
+    SportsCar sc(
+        "Ferrari",
+        "SF90",
+        4,
+        2,
+        340
+    );
+
+    cout << endl;
+
+    sc.showSportsCarInfo();
+
+    cout << endl;
+
+    sc.startEngine();           // Child Version
+
+    cout << endl;
+
+    sc.Vehicle::startEngine();  // Parent Version
+
+    cout << endl;
+
+    cout << "=========== BIKE ===========" << endl;
+
+    Bike b(
+        "Yamaha",
+        "R15",
+        2,
+        true
+    );
+
+    cout << endl;
+
+    b.showBikeInfo();
+
+    cout << endl;
+
+    return 0;
+}
+
+
