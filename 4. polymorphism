@@ -1,1 +1,582 @@
+# Operator Overloading
 
+## Definition
+In C++, when operators are overloaded, they execute **user-defined functions** whenever used, allowing for customized behavior.
+
+---
+
+## Example: Overloading `+` Operator for Complex Numbers
+
+```cpp
+class Complex {
+public:
+    int real, imag;
+
+    Complex(int r = 0, int i = 0) {
+        real = r;
+        imag = i;
+    }
+
+    Complex operator + (const Complex &obj) {
+        Complex res;
+        res.real = real + obj.real;
+        res.imag = imag + obj.imag;
+        return res;
+    }
+};
+
+If your goal is **"teach me polymorphism + operator overloading + interview questions using Complex Numbers"**, then this is the version I'd put in GitHub notes.
+
+---
+
+# Polymorphism using Complex Numbers (Interview Version)
+
+## What is Polymorphism?
+
+**Poly = Many**
+**Morph = Forms**
+
+Polymorphism means **one interface, multiple behaviors**.
+
+In C++, polymorphism is of 2 types:
+
+### 1. Compile Time Polymorphism
+
+* Function Overloading
+* Operator Overloading
+
+### 2. Runtime Polymorphism
+
+* Function Overriding
+* Virtual Functions
+
+---
+
+# Example: Complex Number Addition using Operator Overloading
+
+Without operator overloading:
+
+```cpp
+Complex c3 = add(c1, c2);
+```
+
+With operator overloading:
+
+```cpp
+Complex c3 = c1 + c2;
+```
+
+Here `+` behaves differently for Complex objects.
+
+This is called **Compile Time Polymorphism** because the compiler decides which function to call during compilation.
+
+---
+
+# Complete Interview Level Code
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Complex
+{
+private:
+    int real;
+    int imag;
+
+public:
+
+    // Default Constructor
+    Complex()
+    {
+        real = 0;
+        imag = 0;
+    }
+
+    // Parameterized Constructor
+    Complex(int r, int i)
+    {
+        real = r;
+        imag = i;
+    }
+
+    // Copy Constructor
+    Complex(const Complex &obj)
+    {
+        real = obj.real;
+        imag = obj.imag;
+    }
+
+    // Getter Functions
+    int getReal() const
+    {
+        return real;
+    }
+
+    int getImag() const
+    {
+        return imag;
+    }
+
+    // Display Function
+    void print() const
+    {
+        cout << real << " + " << imag << "i" << endl;
+    }
+
+    /*
+        Operator Overloading
+
+        c1 + c2
+
+        becomes
+
+        c1.operator+(c2)
+    */
+
+    Complex operator+(const Complex &obj) const
+    {
+        Complex temp;
+
+        temp.real = this->real + obj.real;
+        temp.imag = this->imag + obj.imag;
+
+        return temp;
+    }
+
+    // Overload -
+    Complex operator-(const Complex &obj) const
+    {
+        Complex temp;
+
+        temp.real = real - obj.real;
+        temp.imag = imag - obj.imag;
+
+        return temp;
+    }
+
+    // Overload ==
+    bool operator==(const Complex &obj) const
+    {
+        return (real == obj.real &&
+                imag == obj.imag);
+    }
+
+    // Friend function for <<
+    friend ostream& operator<<(ostream &out,
+                               const Complex &obj);
+
+    // Friend function for >>
+    friend istream& operator>>(istream &in,
+                               Complex &obj);
+};
+
+/*
+    Stream Insertion Operator
+
+    cout << c1;
+*/
+
+ostream& operator<<(ostream &out,
+                    const Complex &obj)
+{
+    out << obj.real
+        << " + "
+        << obj.imag
+        << "i";
+
+    return out;
+}
+
+/*
+    Stream Extraction Operator
+
+    cin >> c1;
+*/
+
+istream& operator>>(istream &in,
+                    Complex &obj)
+{
+    in >> obj.real >> obj.imag;
+
+    return in;
+}
+
+int main()
+{
+    Complex c1(2, 3);
+    Complex c2(4, 5);
+
+    cout << "First Complex Number: "
+         << c1 << endl;
+
+    cout << "Second Complex Number: "
+         << c2 << endl;
+
+    Complex sum = c1 + c2;
+
+    cout << "\nAfter Addition:\n";
+    cout << sum << endl;
+
+    Complex diff = c1 - c2;
+
+    cout << "\nAfter Subtraction:\n";
+    cout << diff << endl;
+
+    if(c1 == c2)
+        cout << "\nEqual\n";
+    else
+        cout << "\nNot Equal\n";
+
+    return 0;
+}
+```
+
+---
+
+# Behind the Scenes
+
+When we write:
+
+```cpp
+Complex c3 = c1 + c2;
+```
+
+Compiler converts it to:
+
+```cpp
+Complex c3 = c1.operator+(c2);
+```
+
+---
+
+# Memory Visualization
+
+```cpp
+Complex c1(2,3);
+Complex c2(4,5);
+```
+
+Memory:
+
+```
+c1
+----
+real = 2
+imag = 3
+
+c2
+----
+real = 4
+imag = 5
+```
+
+When:
+
+```cpp
+Complex c3 = c1 + c2;
+```
+
+Execution:
+
+```cpp
+temp.real = 2 + 4 = 6
+temp.imag = 3 + 5 = 8
+```
+
+Return:
+
+```
+c3
+----
+real = 6
+imag = 8
+```
+
+---
+
+# Why const is used?
+
+```cpp
+Complex operator+(const Complex &obj) const
+```
+
+### First const
+
+```cpp
+const Complex &obj
+```
+
+Prevents modification of incoming object.
+
+```cpp
+obj.real = 100; // Error
+```
+
+---
+
+### Second const
+
+```cpp
+... ) const
+```
+
+Guarantees current object won't change.
+
+```cpp
+Complex c1(2,3);
+
+c1 + c2;
+```
+
+Addition should not modify `c1`.
+
+---
+
+# Why Pass By Reference?
+
+Bad:
+
+```cpp
+Complex operator+(Complex obj)
+```
+
+Creates copy every time.
+
+Good:
+
+```cpp
+Complex operator+(const Complex &obj)
+```
+
+No unnecessary copy.
+
+Interviewers love this question.
+
+---
+
+# Operator Overloading Rules
+
+### Allowed
+
+```cpp
++
+-
+*
+/
+%
+==
+!=
+<
+>
+<=
+>=
+++
+--
+[]
+()
+<<
+>>
+```
+
+---
+
+### Not Allowed
+
+```cpp
+::
+.
+.*
+?:
+sizeof
+typeid
+```
+
+Interview favorite.
+
+---
+
+# Function Overloading (Compile Time Polymorphism)
+
+```cpp
+class Calculator
+{
+public:
+
+    int add(int a, int b)
+    {
+        return a+b;
+    }
+
+    double add(double a, double b)
+    {
+        return a+b;
+    }
+
+    int add(int a, int b, int c)
+    {
+        return a+b+c;
+    }
+};
+```
+
+Compiler decides function at compile time.
+
+---
+
+# Runtime Polymorphism Example
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class ComplexOperation
+{
+public:
+
+    virtual void operation()
+    {
+        cout<<"Base Operation"<<endl;
+    }
+
+    virtual ~ComplexOperation() {}
+};
+
+class Addition : public ComplexOperation
+{
+public:
+
+    void operation() override
+    {
+        cout<<"Complex Number Addition"<<endl;
+    }
+};
+
+int main()
+{
+    ComplexOperation* ptr;
+
+    Addition add;
+
+    ptr = &add;
+
+    ptr->operation();
+}
+```
+
+Output:
+
+```cpp
+Complex Number Addition
+```
+
+Because of:
+
+```cpp
+virtual
+```
+
+Runtime decides which function to call.
+
+---
+
+# Most Asked Interview Questions
+
+### Q1 Why is Operator Overloading Compile Time Polymorphism?
+
+Because compiler resolves:
+
+```cpp
+c1 + c2
+```
+
+to
+
+```cpp
+c1.operator+(c2)
+```
+
+during compilation.
+
+---
+
+### Q2 Can all operators be overloaded?
+
+No.
+
+```cpp
+::
+.
+.*
+?:
+sizeof
+typeid
+```
+
+cannot be overloaded.
+
+---
+
+### Q3 Can we create new operators?
+
+No.
+
+Only existing operators can be overloaded.
+
+---
+
+### Q4 Can precedence change after overloading?
+
+No.
+
+Operator precedence remains same.
+
+---
+
+### Q5 Why use friend for << and >> ?
+
+Because left operand is:
+
+```cpp
+cout
+```
+
+not Complex object.
+
+So member function won't work naturally.
+
+Hence:
+
+```cpp
+friend ostream& operator<<(...)
+```
+
+---
+
+### Q6 Difference Between Overloading and Overriding?
+
+| Overloading        | Overriding       |
+| ------------------ | ---------------- |
+| Compile Time       | Runtime          |
+| Same Function Name | Same Signature   |
+| Same Class         | Parent-Child     |
+| No Virtual Needed  | Virtual Required |
+
+---
+
+This single Complex Number example covers:
+
+* Class
+* Constructors
+* Copy Constructor
+* Encapsulation
+* Operator Overloading
+* Friend Functions
+* Stream Operators
+* Compile Time Polymorphism
+* Runtime Polymorphism
+* const correctness
+* Pass by Reference
+* Interview FAQs
+
+which is more than enough for OOP interview rounds and C++ viva questions.
