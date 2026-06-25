@@ -17,3 +17,20 @@ Abstraction in Header files
 
 3. E.g., Sort(), for example, is used to sort an array, a list, or a collection of items, and we know that if we give a container to sort,
 it will sort it, but we don't know which sorting algorithm it uses to sort that container.
+
+
+What is Abstract Class?
+
+1. Class that contains at least one pure virtual function, and these classes cannot be instantiated.
+
+2. It has come from the idea of Abstraction.
+
+Class → Interface
+
+What is Abstract Class?
+
+1. Class that contains at least one pure virtual function, and these classes cannot be instantiated.
+
+2. It has come from the idea of Abstraction.
+
+Class → Interface
