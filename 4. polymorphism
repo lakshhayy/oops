@@ -580,3 +580,31 @@ This single Complex Number example covers:
 * Interview FAQs
 
 which is more than enough for OOP interview rounds and C++ viva questions.
+
+
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    virtual void sound() {      // Virtual function
+        cout << "Animal makes a sound\n";
+    }
+};
+
+class Dog : public Animal {
+public:
+    void sound() override {     // Overrides base class function
+        cout << "Dog barks\n";
+    }
+};
+
+int main() {
+    Animal *ptr;      // Base class pointer
+    Dog d;
+
+    ptr = &d;
+    ptr->sound();     // Runtime Polymorphism
+
+    return 0;
+}
